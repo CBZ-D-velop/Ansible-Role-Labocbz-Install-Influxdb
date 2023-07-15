@@ -1,0 +1,7 @@
+---
+inv_influxdb_http_bind_address: "0.0.0.0"
+inv_influxdb_http_bind_port: 8086
+
+inv_influxdb_ssl: true
+inv_influxdb_ssl_domain: "my.influxdb2-server.domain.tld"
+inv_influxdb_ssl_path: "/etc/influxdb/ssl"

@@ -1,0 +1,14 @@
+##############################
+#                            #
+# Ansible / Tower managed on #
+#                            #
+##############################
+
+INFLUXD_HTTP_BIND_ADDRESS="{{ influxdb_http_bind_address }}:{{ influxdb_http_bind_port }}"
+
+{% if influxdb_ssl is defined %}
+{% if influxdb_ssl %}
+INFLUXD_TLS_CERT="{{ influxdb_ssl_cert }}"
+INFLUXD_TLS_KEY="{{ influxdb_ssl_key }}"
+{% endif %}
+{% endif %}

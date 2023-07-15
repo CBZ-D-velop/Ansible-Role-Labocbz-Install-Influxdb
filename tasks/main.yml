@@ -1,0 +1,36 @@
+---
+- name: "Install InfluxDB"
+  notify: "Enable and start InfluxDB"
+  block:
+    - name: "Get InfluxDB2 key"
+      ansible.builtin.get_url:
+        url: "https://repos.influxdata.com/influxdata-archive_compat.key"
+        dest: "/tmp"
+        owner: "root"
+        group: "root"
+        mode: 0600
+
+    - name: "Verify the InfluxDB2 key"
+      register: output
+      changed_when: output.rc != 0
+      ansible.builtin.shell: "set -o pipefail | echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c /tmp/influxdata-archive_compat.key' | sha256sum -c && cat /tmp/influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null"
+
+    - name: "Add the InfluxDB2 repository"
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main"
+
+    - name: Update apt and install influxdb2
+      ansible.builtin.package:
+        update_cache: true
+        name:
+          - influxdb2
+
+- name: "Import InfluxDB configuration"
+  notify: "Restart InfluxDB"
+  ansible.builtin.template:
+    src: "templates/influxdb2.j2"
+    dest: "/etc/default/influxdb2"
+    lstrip_blocks: yes
+    owner: "root"
+    group: "root"
+    mode: 0700
