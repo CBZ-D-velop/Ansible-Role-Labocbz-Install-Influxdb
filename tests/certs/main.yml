@@ -12,7 +12,7 @@ inv_cert_bundles:
     #dest_mode: "0755"
   - name: "my.infludb2-server.domain.tld"
     type: "cert"
-    src: "/tmp/my.influxdb2-server.domain.tld.zip"
+    src: "/tmp/my.influxdb2-server-2.domain.tld.zip"
     dest: "/etc/influxdb/ssl"
     #src_user: "myUser"
     #src_password: "secretPassword"
