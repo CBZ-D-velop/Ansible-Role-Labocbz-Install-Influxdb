@@ -8,7 +8,7 @@
         dest: "/tmp"
         owner: "root"
         group: "root"
-        mode: 0600
+        mode: "0600"
 
     - name: "Verify the InfluxDB2 key"
       register: output
@@ -23,7 +23,7 @@
       ansible.builtin.package:
         update_cache: true
         name:
-          - influxdb2
+          - "influxdb2"
 
 - name: "Import InfluxDB configuration"
   notify: "Restart InfluxDB"
@@ -33,4 +33,4 @@
     lstrip_blocks: yes
     owner: "root"
     group: "root"
-    mode: 0700
+    mode: "0700"

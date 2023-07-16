@@ -16,6 +16,18 @@
 
 An Ansible role to install and configure an InfluxDb server on your host.
 
+The Ansible role installs InfluxDB, a time series database, on the target system. The role installs a version that includes the InfluxData web interface, providing a user-friendly interface for managing and querying the database.
+
+Administrators have the flexibility to configure the SSL/TLS settings by enabling or disabling it. When SSL/TLS is enabled, the role allows customization of the SSL certificate and key paths, providing the capability to use custom SSL certificates for secure communications.
+
+Furthermore, administrators can define the bind address and port for the InfluxDB HTTP service, allowing them to set the address and port where InfluxDB will listen for incoming HTTP requests.
+
+It is important to note that while the role offers a robust setup for InfluxDB with SSL/TLS and customizable bind address and port, the role does not support a cluster mode. InfluxDB's native clustering functionality is not included in the role, as it is not developed by the creators of the database.
+
+By deploying InfluxDB with this role, administrators can quickly set up a time series database with an integrated web interface for easy management. The ability to configure SSL/TLS and specify the HTTP bind address and port provides a secure and customizable environment for storing and analyzing time series data.
+
+In summary, the InfluxDB role simplifies the installation and configuration of the database, offering a powerful solution with SSL/TLS support and customizable HTTP bind settings. Administrators can leverage this role to deploy a feature-rich time series database for their applications, benefiting from the performance and scalability it provides.
+
 ## Folder structure
 
 By default Ansible will look in each directory within a role for a main.yml file for relevant content (also man.yml and main):
