@@ -17,8 +17,5 @@
         influxdb_http_bind_port: "{{ inv_influxdb_http_bind_port }}"
         influxdb_ssl: "{{ inv_influxdb_ssl }}"
         influxdb_ssl_domain: "{{ inv_influxdb_ssl_domain }}"
-        influxdb_ssl_cert: "{{ inv_influxdb_ssl_cert }}"
-        influxdb_ssl_key: "{{ inv_influxdb_ssl_key }}"
-        influxdb_ssl_path: "{{ inv_influxdb_ssl_path }}"
       ansible.builtin.include_role:
         name: "labocbz.install_influxdb"
