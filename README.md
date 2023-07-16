@@ -115,7 +115,7 @@ influxdb_http_bind_address: "0.0.0.0"
 influxdb_http_bind_port: 8086
 
 influxdb_ssl: true
-influxdb_ssl_domain: "my.infludb2-server.domain.tld"
+influxdb_ssl_domain: "my.influxdb2-server-2.domain.tld"
 influxdb_ssl_path: "/etc/influxdb/ssl"
 influxdb_ssl_key: "{{ influxdb_ssl_path }}/{{ influxdb_ssl_domain }}/{{ influxdb_ssl_domain }}.key"
 influxdb_ssl_cert: "{{ influxdb_ssl_path }}/{{ influxdb_ssl_domain }}/{{ influxdb_ssl_domain }}.crt"
