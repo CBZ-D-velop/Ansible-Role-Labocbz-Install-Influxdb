@@ -135,8 +135,10 @@ inv_influxdb_http_bind_address: "0.0.0.0"
 inv_influxdb_http_bind_port: 8086
 
 inv_influxdb_ssl: true
-inv_influxdb_ssl_domain: "my.influxdb2-server.domain.tld"
+inv_influxdb_ssl_domain: "my-influxdb-server.domain.tld"
 inv_influxdb_ssl_path: "/etc/influxdb/ssl"
+inv_influxdb_ssl_key: "{{ inv_influxdb_ssl_path }}/{{ inv_influxdb_ssl_domain }}/{{ inv_influxdb_ssl_domain }}.pem.key"
+inv_influxdb_ssl_cert: "{{ inv_influxdb_ssl_path }}/{{ inv_influxdb_ssl_domain }}/{{ inv_influxdb_ssl_domain }}.pem.crt"
 
 ```
 
@@ -159,6 +161,8 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
     influxdb_http_bind_port: "{{ inv_influxdb_http_bind_port }}"
     influxdb_ssl: "{{ inv_influxdb_ssl }}"
     influxdb_ssl_domain: "{{ inv_influxdb_ssl_domain }}"
+    influxdb_ssl_key: "{{ inv_influxdb_ssl_key }}"
+    influxdb_ssl_cert: "{{ inv_influxdb_ssl_cert }}"
     ansible.builtin.include_role:
     name: "labocbz.install_influxdb"
 ```
