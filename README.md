@@ -135,8 +135,10 @@ inv_influxdb_http_bind_address: "0.0.0.0"
 inv_influxdb_http_bind_port: 8086
 
 inv_influxdb_ssl: true
-inv_influxdb_ssl_domain: "my.influxdb2-server.domain.tld"
+inv_influxdb_ssl_domain: "my-influxdb-server.domain.tld"
 inv_influxdb_ssl_path: "/etc/influxdb/ssl"
+inv_influxdb_ssl_key: "{{ inv_influxdb_ssl_path }}/{{ inv_influxdb_ssl_domain }}/{{ inv_influxdb_ssl_domain }}.pem.key"
+inv_influxdb_ssl_cert: "{{ inv_influxdb_ssl_path }}/{{ inv_influxdb_ssl_domain }}/{{ inv_influxdb_ssl_domain }}.pem.crt"
 
 ```
 
@@ -159,6 +161,8 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
     influxdb_http_bind_port: "{{ inv_influxdb_http_bind_port }}"
     influxdb_ssl: "{{ inv_influxdb_ssl }}"
     influxdb_ssl_domain: "{{ inv_influxdb_ssl_domain }}"
+    influxdb_ssl_key: "{{ inv_influxdb_ssl_key }}"
+    influxdb_ssl_cert: "{{ inv_influxdb_ssl_cert }}"
     ansible.builtin.include_role:
     name: "labocbz.install_influxdb"
 ```
@@ -175,6 +179,13 @@ Here you can put your change to keep a trace of your work and decisions.
 
 * SSL/TLS Materials are not handled by the role
 * Certs/CA have to be installed previously/after this role use
+
+### 2023-10-06: New CICD, new Images
+
+* New CI/CD scenario name
+* Molecule now use remote Docker image by Lord Robin Crombez
+* Molecule now use custom Docker image in CI/CD by env vars
+* New CICD with needs and optimization
 
 ## Authors
 
