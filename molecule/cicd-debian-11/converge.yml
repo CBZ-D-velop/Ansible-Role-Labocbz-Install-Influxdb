@@ -18,6 +18,6 @@
         influxdb_ssl: "{{ inv_influxdb_ssl }}"
         influxdb_ssl_domain: "{{ inv_influxdb_ssl_domain }}"
         influxdb_ssl_key: "{{ inv_influxdb_ssl_key }}"
-        influxdb_ssl_crt: "{{ inv_influxdb_ssl_crt }}"
+        influxdb_ssl_cert: "{{ inv_influxdb_ssl_cert }}"
       ansible.builtin.include_role:
         name: "labocbz.install_influxdb"
