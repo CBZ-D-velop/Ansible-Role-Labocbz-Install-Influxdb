@@ -21,7 +21,7 @@
 
     - name: Update apt and install influxdb2
       ansible.builtin.package:
-        update_cache: false
+        update_cache: true
         name:
           - "influxdb2"
 
