@@ -7,8 +7,8 @@
   tasks:
 
     - name: "Get InfluxDB service current state"
-      register: influxdb_service_status
-      failed_when: not influxdb_service_status.status.ActiveState == 'active'
+      register: install_influxdb_service_status
+      failed_when: not install_influxdb_service_status.status.ActiveState == 'active'
       ignore_errors: true
       ansible.builtin.systemd:
         name: "influxdb"
@@ -23,15 +23,15 @@
       ignore_errors: true
       ansible.builtin.wait_for:
         host: "{{ inventory_hostname }}"
-        port: "{{ inv_influxdb_http_bind_port }}"
+        port: "{{ inv_install_influxdb_http_bind_port }}"
         timeout: 120
 
     - name: "Check SSL/TLS access"
-      when: inv_influxdb_ssl
+      when: inv_install_influxdb_ssl
       register: result
       failed_when: result.status != 200
       ignore_errors: true
       ansible.builtin.uri:
-        url: "https://{{ inventory_hostname }}:{{ inv_influxdb_http_bind_port }}/"
+        url: "https://{{ inventory_hostname }}:{{ inv_install_influxdb_http_bind_port }}/"
         method: "GET"
         validate_certs: true

@@ -34,3 +34,18 @@
     owner: "root"
     group: "root"
     mode: "0700"
+
+- name: "Import Cert and Key in /etc"
+  when: install_influxdb_ssl | default(false)
+  block:
+    - name: "Import Cert"
+      register: output
+      changed_when: output.rc != 0
+      ansible.builtin.shell: >
+        cat {{ install_influxdb_ssl_cert }} > /etc/influxdb2-cert.pem.crt
+
+    - name: "Import Key"
+      register: output
+      changed_when: output.rc != 0
+      ansible.builtin.shell: >
+        cat {{ install_influxdb_ssl_key }} > /etc/influxdb2-key.pem.key

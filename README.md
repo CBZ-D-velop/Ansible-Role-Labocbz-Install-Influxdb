@@ -111,14 +111,14 @@ Some vars a required to run this role:
 
 ```YAML
 ---
-influxdb_http_bind_address: "0.0.0.0"
-influxdb_http_bind_port: 8086
+install_influxdb_http_bind_address: "0.0.0.0"
+install_influxdb_http_bind_port: 8086
 
-influxdb_ssl: true
-influxdb_ssl_domain: "my.influxdb2-server-2.domain.tld"
-influxdb_ssl_path: "/etc/influxdb/ssl"
-influxdb_ssl_key: "{{ influxdb_ssl_path }}/{{ influxdb_ssl_domain }}/{{ influxdb_ssl_domain }}.key"
-influxdb_ssl_cert: "{{ influxdb_ssl_path }}/{{ influxdb_ssl_domain }}/{{ influxdb_ssl_domain }}.crt"
+install_influxdb_ssl: true
+install_influxdb_ssl_domain: "my.influxdb2-server-2.domain.tld"
+install_influxdb_ssl_path: "/etc/influxdb/ssl"
+install_influxdb_ssl_key: "{{ install_influxdb_ssl_path }}/{{ install_influxdb_ssl_domain }}/{{ install_influxdb_ssl_domain }}.key"
+install_influxdb_ssl_cert: "{{ install_influxdb_ssl_path }}/{{ install_influxdb_ssl_domain }}/{{ install_influxdb_ssl_domain }}.crt"
 
 ```
 
@@ -131,14 +131,14 @@ In order to surchage vars, you have multiples possibilities but for mains cases 
 ```YAML
 # From inventory
 ---
-inv_influxdb_http_bind_address: "0.0.0.0"
-inv_influxdb_http_bind_port: 8086
+inv_install_influxdb_http_bind_address: "0.0.0.0"
+inv_install_influxdb_http_bind_port: 8086
 
-inv_influxdb_ssl: true
-inv_influxdb_ssl_domain: "my-influxdb-server.domain.tld"
-inv_influxdb_ssl_path: "/etc/influxdb/ssl"
-inv_influxdb_ssl_key: "{{ inv_influxdb_ssl_path }}/{{ inv_influxdb_ssl_domain }}/{{ inv_influxdb_ssl_domain }}.pem.key"
-inv_influxdb_ssl_cert: "{{ inv_influxdb_ssl_path }}/{{ inv_influxdb_ssl_domain }}/{{ inv_influxdb_ssl_domain }}.pem.crt"
+inv_install_influxdb_ssl: true
+inv_install_influxdb_ssl_domain: "my-influxdb-server.domain.tld"
+inv_install_influxdb_ssl_path: "/etc/influxdb/ssl"
+inv_install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_path }}/{{ inv_install_influxdb_ssl_domain }}/{{ inv_install_influxdb_ssl_domain }}.pem.key"
+inv_install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_path }}/{{ inv_install_influxdb_ssl_domain }}/{{ inv_install_influxdb_ssl_domain }}.pem.crt"
 
 ```
 
@@ -157,12 +157,12 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
     tags:
     - "labocbz.install_influxdb"
     vars:
-    influxdb_http_bind_address: "{{ inv_influxdb_http_bind_address }}"
-    influxdb_http_bind_port: "{{ inv_influxdb_http_bind_port }}"
-    influxdb_ssl: "{{ inv_influxdb_ssl }}"
-    influxdb_ssl_domain: "{{ inv_influxdb_ssl_domain }}"
-    influxdb_ssl_key: "{{ inv_influxdb_ssl_key }}"
-    influxdb_ssl_cert: "{{ inv_influxdb_ssl_cert }}"
+    install_influxdb_http_bind_address: "{{ inv_install_influxdb_http_bind_address }}"
+    install_influxdb_http_bind_port: "{{ inv_install_influxdb_http_bind_port }}"
+    install_influxdb_ssl: "{{ inv_install_influxdb_ssl }}"
+    install_influxdb_ssl_domain: "{{ inv_install_influxdb_ssl_domain }}"
+    install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_key }}"
+    install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_cert }}"
     ansible.builtin.include_role:
     name: "labocbz.install_influxdb"
 ```
@@ -186,6 +186,12 @@ Here you can put your change to keep a trace of your work and decisions.
 * Molecule now use remote Docker image by Lord Robin Crombez
 * Molecule now use custom Docker image in CI/CD by env vars
 * New CICD with needs and optimization
+
+### 2023-12-11: Cert and Ca location
+
+* Role now copy / import cert in /etc/influxdb2-cert.pem.crt
+* Role now copy / import key in /etc/influxdb2-key.pem.key
+* Because in some system, create a user and after install with package can be broken (SELinux)
 
 ## Authors
 
