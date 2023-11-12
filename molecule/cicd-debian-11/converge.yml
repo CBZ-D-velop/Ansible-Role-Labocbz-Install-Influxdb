@@ -13,11 +13,11 @@
       tags:
         - "labocbz.install_influxdb"
       vars:
-        influxdb_http_bind_address: "{{ inv_influxdb_http_bind_address }}"
-        influxdb_http_bind_port: "{{ inv_influxdb_http_bind_port }}"
-        influxdb_ssl: "{{ inv_influxdb_ssl }}"
-        influxdb_ssl_domain: "{{ inv_influxdb_ssl_domain }}"
-        influxdb_ssl_key: "{{ inv_influxdb_ssl_key }}"
-        influxdb_ssl_cert: "{{ inv_influxdb_ssl_cert }}"
+        install_influxdb_http_bind_address: "{{ inv_install_influxdb_http_bind_address }}"
+        install_influxdb_http_bind_port: "{{ inv_install_influxdb_http_bind_port }}"
+        install_influxdb_ssl: "{{ inv_install_influxdb_ssl }}"
+        install_influxdb_ssl_domain: "{{ inv_install_influxdb_ssl_domain }}"
+        install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_key }}"
+        install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_cert }}"
       ansible.builtin.include_role:
         name: "labocbz.install_influxdb"

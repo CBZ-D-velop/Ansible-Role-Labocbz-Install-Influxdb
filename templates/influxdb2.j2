@@ -4,9 +4,9 @@
 #                            #
 ##############################
 
-INFLUXD_HTTP_BIND_ADDRESS="{{ influxdb_http_bind_address }}:{{ influxdb_http_bind_port }}"
+INFLUXD_HTTP_BIND_ADDRESS="{{ install_influxdb_http_bind_address }}:{{ install_influxdb_http_bind_port }}"
 
-{% if influxdb_ssl | default(false) %}
-INFLUXD_TLS_CERT="{{ influxdb_ssl_cert }}"
-INFLUXD_TLS_KEY="{{ influxdb_ssl_key }}"
+{% if install_influxdb_ssl | default(false) %}
+INFLUXD_TLS_CERT="/etc/influxdb2-cert.pem.crt"
+INFLUXD_TLS_KEY="/etc/influxdb2-key.pem.key"
 {% endif %}
