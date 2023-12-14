@@ -1,0 +1,35 @@
+##############################
+#                            #
+# Ansible / Tower managed on #
+#                            #
+##############################
+
+[Unit]
+Description=InfluxDB is an open-source, distributed, time series database
+Documentation=https://docs.influxdata.com/influxdb/
+After=network-online.target
+
+[Service]
+User={{ install_influxdb_user }}
+Group={{ install_influxdb_group }}
+LimitNOFILE=65536
+EnvironmentFile=-/etc/default/influxdb2
+ExecStart=/bin/sh -c '/usr/lib/influxdb/scripts/influxd-systemd-start.sh \
+            > /var/log/influxdb/influxdb.log 2>&1'
+
+KillMode=control-group
+Restart=on-failure
+Type=forking
+PIDFile=/var/lib/influxdb/influxd.pid
+
+StateDirectory={{ install_influxdb_user }}
+StateDirectoryMode=0700
+
+LogsDirectory=influxdb
+LogsDirectoryMode=755
+UMask=0027
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
+Alias=influxd.service
