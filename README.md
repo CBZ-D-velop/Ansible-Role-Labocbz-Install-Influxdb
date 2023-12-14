@@ -111,6 +111,9 @@ Some vars a required to run this role:
 
 ```YAML
 ---
+install_influxdb_group: "influxdb"
+install_influxdb_user: "influxdb"
+
 install_influxdb_http_bind_address: "0.0.0.0"
 install_influxdb_http_bind_port: 8086
 
@@ -154,16 +157,16 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
 
 ```YAML
 - name: "Include labocbz.install_influxdb"
-    tags:
+  tags:
     - "labocbz.install_influxdb"
-    vars:
+  vars:
     install_influxdb_http_bind_address: "{{ inv_install_influxdb_http_bind_address }}"
     install_influxdb_http_bind_port: "{{ inv_install_influxdb_http_bind_port }}"
     install_influxdb_ssl: "{{ inv_install_influxdb_ssl }}"
     install_influxdb_ssl_domain: "{{ inv_install_influxdb_ssl_domain }}"
     install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_key }}"
     install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_cert }}"
-    ansible.builtin.include_role:
+  ansible.builtin.include_role:
     name: "labocbz.install_influxdb"
 ```
 
@@ -192,6 +195,12 @@ Here you can put your change to keep a trace of your work and decisions.
 * Role now copy / import cert in /etc/influxdb2-cert.pem.crt
 * Role now copy / import key in /etc/influxdb2-key.pem.key
 * Because in some system, create a user and after install with package can be broken (SELinux)
+
+### 2023-12-14: System users
+
+* Role can now use system users and address groups
+* Role handle the log path
+* Role create a service file, in order do not log inside sysout
 
 ## Authors
 
