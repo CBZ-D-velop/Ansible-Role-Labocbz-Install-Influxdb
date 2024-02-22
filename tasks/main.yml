@@ -42,14 +42,12 @@
       register: output
       changed_when: output.rc != 0
       ansible.builtin.shell: >
-        set -o pipefail
         cat {{ install_influxdb__ssl_cert }} > /etc/influxdb/ssl/influxdb2-cert.pem.crt
 
     - name: "Import Key"
       register: output
       changed_when: output.rc != 0
       ansible.builtin.shell: >
-        set -o pipefail
         cat {{ install_influxdb__ssl_key }} > /etc/influxdb/ssl/influxdb2-key.pem.key
 
     - name: "Fix permissions"
