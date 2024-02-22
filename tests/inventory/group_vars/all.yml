@@ -1,0 +1,13 @@
+---
+inv_prepare_host__system_users:
+  - login: "influxdb"
+    group: "influxdb"
+
+inv_install_influxdb__http_bind_address: "0.0.0.0"
+inv_install_influxdb__http_bind_port: 8086
+
+inv_install_influxdb__ssl: true
+inv_install_influxdb__ssl_domain: "my-influxdb-server.domain.tld"
+inv_install_influxdb__ssl_path: "/etc/influxdb/ssl"
+inv_install_influxdb__ssl_key: "{{ inv_install_influxdb__ssl_path }}/{{ inv_install_influxdb__ssl_domain }}/{{ inv_install_influxdb__ssl_domain }}.pem.key"
+inv_install_influxdb__ssl_cert: "{{ inv_install_influxdb__ssl_path }}/{{ inv_install_influxdb__ssl_domain }}/{{ inv_install_influxdb__ssl_domain }}.pem.crt"

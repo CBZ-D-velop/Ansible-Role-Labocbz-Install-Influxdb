@@ -1,12 +1,12 @@
 ---
-install_influxdb_group: "influxdb"
-install_influxdb_user: "influxdb"
+install_influxdb__group: "influxdb"
+install_influxdb__user: "influxdb"
 
-install_influxdb_http_bind_address: "0.0.0.0"
-install_influxdb_http_bind_port: 8086
+install_influxdb__http_bind_address: "0.0.0.0"
+install_influxdb__http_bind_port: 8086
 
-install_influxdb_ssl: true
-install_influxdb_ssl_domain: "my.influxdb2-server-2.domain.tld"
-install_influxdb_ssl_path: "/etc/influxdb/ssl"
-install_influxdb_ssl_key: "{{ install_influxdb_ssl_path }}/{{ install_influxdb_ssl_domain }}/{{ install_influxdb_ssl_domain }}.key"
-install_influxdb_ssl_cert: "{{ install_influxdb_ssl_path }}/{{ install_influxdb_ssl_domain }}/{{ install_influxdb_ssl_domain }}.crt"
+install_influxdb__ssl: true
+install_influxdb__ssl_domain: "my.influxdb2-server-2.domain.tld"
+install_influxdb__ssl_path: "/etc/influxdb/ssl"
+install_influxdb__ssl_key: "{{ install_influxdb__ssl_path }}/{{ install_influxdb__ssl_domain }}/{{ install_influxdb__ssl_domain }}.key"
+install_influxdb__ssl_cert: "{{ install_influxdb__ssl_path }}/{{ install_influxdb__ssl_domain }}/{{ install_influxdb__ssl_domain }}.crt"

@@ -111,17 +111,17 @@ Some vars a required to run this role:
 
 ```YAML
 ---
-install_influxdb_group: "influxdb"
-install_influxdb_user: "influxdb"
+install_influxdb__group: "influxdb"
+install_influxdb__user: "influxdb"
 
-install_influxdb_http_bind_address: "0.0.0.0"
-install_influxdb_http_bind_port: 8086
+install_influxdb__http_bind_address: "0.0.0.0"
+install_influxdb__http_bind_port: 8086
 
-install_influxdb_ssl: true
-install_influxdb_ssl_domain: "my.influxdb2-server-2.domain.tld"
-install_influxdb_ssl_path: "/etc/influxdb/ssl"
-install_influxdb_ssl_key: "{{ install_influxdb_ssl_path }}/{{ install_influxdb_ssl_domain }}/{{ install_influxdb_ssl_domain }}.key"
-install_influxdb_ssl_cert: "{{ install_influxdb_ssl_path }}/{{ install_influxdb_ssl_domain }}/{{ install_influxdb_ssl_domain }}.crt"
+install_influxdb__ssl: true
+install_influxdb__ssl_domain: "my.influxdb2-server-2.domain.tld"
+install_influxdb__ssl_path: "/etc/influxdb/ssl"
+install_influxdb__ssl_key: "{{ install_influxdb__ssl_path }}/{{ install_influxdb__ssl_domain }}/{{ install_influxdb__ssl_domain }}.key"
+install_influxdb__ssl_cert: "{{ install_influxdb__ssl_path }}/{{ install_influxdb__ssl_domain }}/{{ install_influxdb__ssl_domain }}.crt"
 
 ```
 
@@ -134,14 +134,14 @@ In order to surchage vars, you have multiples possibilities but for mains cases 
 ```YAML
 # From inventory
 ---
-inv_install_influxdb_http_bind_address: "0.0.0.0"
-inv_install_influxdb_http_bind_port: 8086
+inv_install_influxdb__http_bind_address: "0.0.0.0"
+inv_install_influxdb__http_bind_port: 8086
 
-inv_install_influxdb_ssl: true
-inv_install_influxdb_ssl_domain: "my-influxdb-server.domain.tld"
-inv_install_influxdb_ssl_path: "/etc/influxdb/ssl"
-inv_install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_path }}/{{ inv_install_influxdb_ssl_domain }}/{{ inv_install_influxdb_ssl_domain }}.pem.key"
-inv_install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_path }}/{{ inv_install_influxdb_ssl_domain }}/{{ inv_install_influxdb_ssl_domain }}.pem.crt"
+inv_install_influxdb__ssl: true
+inv_install_influxdb__ssl_domain: "my-influxdb-server.domain.tld"
+inv_install_influxdb__ssl_path: "/etc/influxdb/ssl"
+inv_install_influxdb__ssl_key: "{{ inv_install_influxdb__ssl_path }}/{{ inv_install_influxdb__ssl_domain }}/{{ inv_install_influxdb__ssl_domain }}.pem.key"
+inv_install_influxdb__ssl_cert: "{{ inv_install_influxdb__ssl_path }}/{{ inv_install_influxdb__ssl_domain }}/{{ inv_install_influxdb__ssl_domain }}.pem.crt"
 
 ```
 
@@ -160,12 +160,12 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
   tags:
     - "labocbz.install_influxdb"
   vars:
-    install_influxdb_http_bind_address: "{{ inv_install_influxdb_http_bind_address }}"
-    install_influxdb_http_bind_port: "{{ inv_install_influxdb_http_bind_port }}"
-    install_influxdb_ssl: "{{ inv_install_influxdb_ssl }}"
-    install_influxdb_ssl_domain: "{{ inv_install_influxdb_ssl_domain }}"
-    install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_key }}"
-    install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_cert }}"
+    install_influxdb__http_bind_address: "{{ inv_install_influxdb__http_bind_address }}"
+    install_influxdb__http_bind_port: "{{ inv_install_influxdb__http_bind_port }}"
+    install_influxdb__ssl: "{{ inv_install_influxdb__ssl }}"
+    install_influxdb__ssl_domain: "{{ inv_install_influxdb__ssl_domain }}"
+    install_influxdb__ssl_key: "{{ inv_install_influxdb__ssl_key }}"
+    install_influxdb__ssl_cert: "{{ inv_install_influxdb__ssl_cert }}"
   ansible.builtin.include_role:
     name: "labocbz.install_influxdb"
 ```
@@ -201,6 +201,18 @@ Here you can put your change to keep a trace of your work and decisions.
 * Role can now use system users and address groups
 * Role handle the log path
 * Role create a service file, in order do not log inside sysout
+
+### 2024-02-22: New CICD and fixes
+
+* Added support for Ubuntu 22
+* Added support for Debian 11/22
+* Edited vars for linting (role name and __)
+* Added generic support for Docker dind (can add used for obscures reasons ... user in use)
+* Fix idempotency
+* Added informations for UID and GID for user/groups
+* Added support for user password creation (on_create)
+* New CI, need work on tag and releases
+* CI use now Sonarqube
 
 ## Authors
 

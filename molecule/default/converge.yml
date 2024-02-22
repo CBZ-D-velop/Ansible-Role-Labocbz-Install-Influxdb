@@ -1,23 +1,17 @@
 ---
 - name: "Converge"
-  hosts: "all"
+  hosts: "local"
   tasks:
-    # replace these tasks with whatever you find suitable to test
-    - name: "Copy something to test use of synchronize module"
-      ansible.builtin.copy:
-        src: "/etc/hosts"
-        dest: "/tmp/hosts-from-controller"
-        mode: 0700
 
     - name: "Include labocbz.install_influxdb"
       tags:
         - "labocbz.install_influxdb"
       vars:
-        install_influxdb_http_bind_address: "{{ inv_install_influxdb_http_bind_address }}"
-        install_influxdb_http_bind_port: "{{ inv_install_influxdb_http_bind_port }}"
-        install_influxdb_ssl: "{{ inv_install_influxdb_ssl }}"
-        install_influxdb_ssl_domain: "{{ inv_install_influxdb_ssl_domain }}"
-        install_influxdb_ssl_key: "{{ inv_install_influxdb_ssl_key }}"
-        install_influxdb_ssl_cert: "{{ inv_install_influxdb_ssl_cert }}"
+        install_influxdb__http_bind_address: "{{ inv_install_influxdb__http_bind_address }}"
+        install_influxdb__http_bind_port: "{{ inv_install_influxdb__http_bind_port }}"
+        install_influxdb__ssl: "{{ inv_install_influxdb__ssl }}"
+        install_influxdb__ssl_domain: "{{ inv_install_influxdb__ssl_domain }}"
+        install_influxdb__ssl_key: "{{ inv_install_influxdb__ssl_key }}"
+        install_influxdb__ssl_cert: "{{ inv_install_influxdb__ssl_cert }}"
       ansible.builtin.include_role:
         name: "labocbz.install_influxdb"

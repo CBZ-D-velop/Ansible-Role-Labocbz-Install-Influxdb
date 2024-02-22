@@ -10,8 +10,8 @@ Documentation=https://docs.influxdata.com/influxdb/
 After=network-online.target
 
 [Service]
-User={{ install_influxdb_user }}
-Group={{ install_influxdb_group }}
+User={{ install_influxdb__user }}
+Group={{ install_influxdb__group }}
 LimitNOFILE=65536
 EnvironmentFile=-/etc/default/influxdb2
 ExecStart=/bin/sh -c '/usr/lib/influxdb/scripts/influxd-systemd-start.sh \
@@ -22,7 +22,7 @@ Restart=on-failure
 Type=forking
 PIDFile=/var/lib/influxdb/influxd.pid
 
-StateDirectory={{ install_influxdb_user }}
+StateDirectory={{ install_influxdb__user }}
 StateDirectoryMode=0700
 
 LogsDirectory=influxdb
