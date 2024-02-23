@@ -31,24 +31,24 @@
     src: "templates/influxdb2.j2"
     dest: "/etc/default/influxdb2"
     lstrip_blocks: yes
-    owner: "{{ install_influxdb_user }}"
-    group: "{{ install_influxdb_group }}"
+    owner: "{{ install_influxdb__user }}"
+    group: "{{ install_influxdb__group }}"
     mode: "0700"
 
 - name: "Import Cert and Key in /etc"
-  when: install_influxdb_ssl | default(false)
+  when: install_influxdb__ssl | default(false)
   block:
     - name: "Import Cert"
       register: output
       changed_when: output.rc != 0
       ansible.builtin.shell: >
-        cat {{ install_influxdb_ssl_cert }} > /etc/influxdb/ssl/influxdb2-cert.pem.crt
+        cat {{ install_influxdb__ssl_cert }} > /etc/influxdb/ssl/influxdb2-cert.pem.crt
 
     - name: "Import Key"
       register: output
       changed_when: output.rc != 0
       ansible.builtin.shell: >
-        cat {{ install_influxdb_ssl_key }} > /etc/influxdb/ssl/influxdb2-key.pem.key
+        cat {{ install_influxdb__ssl_key }} > /etc/influxdb/ssl/influxdb2-key.pem.key
 
     - name: "Fix permissions"
       loop:
@@ -61,19 +61,19 @@
       ansible.builtin.file:
         path: "{{ file }}"
         state: touch
-        owner: "{{ install_influxdb_user }}"
-        group: "{{ install_influxdb_group }}"
+        owner: "{{ install_influxdb__user }}"
+        group: "{{ install_influxdb__group }}"
         mode: "0700"
 
 - name: "Prepare folders"
   register: output
   changed_when: output.size <= 0
   ansible.builtin.file:
-    path: "/home/{{ install_influxdb_user }}"
+    path: "/home/{{ install_influxdb__user }}"
     state: directory
     recurse: yes
-    group: "{{ install_influxdb_group }}"
-    owner: "{{ install_influxdb_user }}"
+    group: "{{ install_influxdb__group }}"
+    owner: "{{ install_influxdb__user }}"
     mode: "0700"
 
 - name: "Import Influxdb service file"
