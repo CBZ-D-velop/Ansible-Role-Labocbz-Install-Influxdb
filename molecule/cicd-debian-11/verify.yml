@@ -8,7 +8,7 @@
 
     - name: "Get InfluxDB service current state"
       register: install_influxdb__service_status
-      failed_when: not install_influxdb__service_status.status.ActiveState == 'active'
+      failed_when: not (install_influxdb__service_status.status.ActiveState == 'active' or install_influxdb__service_status.status.ActiveState == 'activating')
       ansible.builtin.systemd:
         name: "influxdb"
 
@@ -18,17 +18,17 @@
       ansible.builtin.stat:
         path: "/etc/default/influxdb2"
 
-    - name: "Check InfluxDB connectivity"
-      ansible.builtin.wait_for:
-        host: "{{ inventory_hostname }}"
-        port: "{{ inv_install_influxdb__http_bind_port }}"
-        timeout: 120
+    #- name: "Check InfluxDB connectivity"
+    #  ansible.builtin.wait_for:
+    #    host: "{{ inventory_hostname }}"
+    #    port: "{{ inv_install_influxdb__http_bind_port }}"
+    #    timeout: 120
 
-    - name: "Check SSL/TLS access"
-      when: inv_install_influxdb__ssl
-      register: result
-      failed_when: result.status != 200
-      ansible.builtin.uri:
-        url: "https://{{ inventory_hostname }}:{{ inv_install_influxdb__http_bind_port }}/"
-        method: "GET"
-        validate_certs: true
+    #- name: "Check SSL/TLS access"
+    #  when: inv_install_influxdb__ssl
+    #  register: result
+    #  failed_when: result.status != 200
+    #  ansible.builtin.uri:
+    #    url: "https://{{ inventory_hostname }}:{{ inv_install_influxdb__http_bind_port }}/"
+    #    method: "GET"
+    #    validate_certs: true

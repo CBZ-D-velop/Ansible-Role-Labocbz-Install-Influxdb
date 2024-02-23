@@ -1,8 +1,8 @@
 ---
 - name: "Enable and start InfluxDB"
   register: install_influxdb__service_status
-  failed_when: not (install_influxdb__service_status.state != "started" or install_influxdb__service_status.state != "inactive")
-  changed_when: not (install_influxdb__service_status.state != "started" or install_influxdb__service_status.state != "inactive")
+  async: 60
+  poll: 0
   ansible.builtin.service:
     name: "influxdb"
     state: "started"
@@ -11,8 +11,8 @@
 
 - name: "Restart InfluxDB"
   register: install_influxdb__service_status
-  failed_when: not install_influxdb__service_status.state != "restarted"
-  changed_when: not install_influxdb__service_status.state != "restarted"
+  async: 60
+  poll: 0
   ansible.builtin.service:
     name: "influxdb"
     state: "restarted"
